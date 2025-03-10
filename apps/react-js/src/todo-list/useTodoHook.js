@@ -10,8 +10,13 @@ export const useTodoHook = () => {
     const todoListStorageValue = localStorage.getItem(STORAGE_KEY);
 
     if (todoListStorageValue !== null) {
-      const savedTodoList = JSON.parse(todoListStorageValue);
-      setTodoList(savedTodoList);
+      try {
+        const savedTodoList = JSON.parse(todoListStorageValue);
+        setTodoList(savedTodoList);
+      } catch (e) {
+        console.error(e);
+        alert("localStorage 파싱 에러가 있습니다.");
+      }
     }
   }, []);
 
